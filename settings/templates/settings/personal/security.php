@@ -66,19 +66,22 @@ if($_['passwordChangeSupported']) {
 	   href="<?php p(link_to_docs('user-2fa')); ?>"></a>
 	<p class="settings-hint"><?php p($l->t('Use a second factor besides your password to increase security for your account.'));?></p>
 	<ul>
-	<?php foreach ($_['twoFactorProviderData']['providers'] as $data) { ?>
+	<?php foreach ($_['twoFactorProviderData']['providers']['themedark']  as $data) { ?>
 		<li>
 			<?php
 			/** @var \OCP\Authentication\TwoFactorAuth\IProvidesPersonalSettings $provider */
 			$provider = $data['provider'];
-			if ($provider instanceof \OCP\Authentication\TwoFactorAuth\IProvidesIcons) {
+
+				if ($provider instanceof \OCP\Authentication\TwoFactorAuth\IProvidesIcons) {
 				$icon = $provider->getDarkIcon();
 			} else {
 				$icon = image_path('core', 'actions/password.svg');
 			}
 			/** @var \OCP\Authentication\TwoFactorAuth\IPersonalProviderSettings $settings */
 			$settings = $data['settings'];
+
 			?>
+
 			<h3>
 				<img class="two-factor-provider-settings-icon" src="<?php p($icon) ?>" alt="">
 				<?php p($provider->getDisplayName()) ?>
